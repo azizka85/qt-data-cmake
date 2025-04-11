@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posts report</title>
+    <style>
+        * {
+            font-family: sans-serif;                        
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        td, th {
+            padding: 16px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;      
+            justify-content: space-around;      
+        }
+    </style>
+</head>
+<body>
+    <h1>Posts</h1>    
+    <div class="container">
+        <table border="1" style="border-collapse: collapse;">
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Text</th>
+                <th>Abstract</th>
+                <th>Liked</th>
+                <th>Author</th>
+            </tr>
+            {% for post in posts %}
+                <tr>
+                    <td>{{post.id}}</td>
+                    <td>{{post.title}}</td>
+                    <td>{{post.text}}</td>
+                    <td>{{post.abstract}}</td>
+                    <td>
+                        {% if post.liked %}
+                            Yes
+                        {% else %}
+                            No
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if post.author %}
+                            {{post.author.firstName}} {{post.author.lastName}}
+                            <br>
+                            {{post.author.email}}
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %} 
+        </table>
+        {{ svgChart | safe }}
+    </div>
+</body>
+</html>
