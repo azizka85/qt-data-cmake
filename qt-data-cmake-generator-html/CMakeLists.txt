@@ -12,7 +12,6 @@ find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
 
 find_package(inja CONFIG REQUIRED)
-find_package(Matplot++ CONFIG REQUIRED)
 
 add_library(qt-data-cmake-generator-html SHARED
   qt-data-cmake-generator-html_global.h
@@ -20,14 +19,10 @@ add_library(qt-data-cmake-generator-html SHARED
   utils.h utils.cpp
 )
 
-target_include_directories(qt-data-cmake-generator-html PUBLIC ${CMAKE_SOURCE_DIR})
-
 target_link_libraries(qt-data-cmake-generator-html
   PRIVATE
-    Qt${QT_VERSION_MAJOR}::Core        
-    pantor::inja
-    Matplot++::cimg
-    Matplot++::matplot
+    Qt${QT_VERSION_MAJOR}::Core
+    pantor::inja    
     qt-data-cmake-prototype
 )
 

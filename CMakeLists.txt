@@ -7,7 +7,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(Qt6 6.5 REQUIRED COMPONENTS Core Sql Network)
 
 find_package(inja REQUIRED)
-find_package(Matplot++ CONFIG REQUIRED)
 find_package(xlnt REQUIRED)
 
 qt_standard_project_setup()
@@ -33,8 +32,6 @@ target_link_libraries(qt-data-cmake
         Qt::Sql
         Qt::Network
         pantor::inja
-        Matplot++::cimg
-        Matplot++::matplot
         xlnt::xlnt
         qt-data-cmake-prototype
         qt-data-cmake-repository-sqlite

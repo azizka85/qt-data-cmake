@@ -158,12 +158,11 @@ int main(int argc, char *argv[])
 
         inja::json viewData;
 
-        viewData["posts"] = Html::postsListToJson(postList);
-        viewData["svgChart"] = Html::generateChart(postList, outDirPath, reportName);
+        viewData["posts"] = Html::postsListToJson(postList);    
 
         Html::ReportGenerator htmlReportGenerator(
             viewData,
-            "./templates/posts.html",
+            "templates/posts.html",
             outDirPath
         );        
 
