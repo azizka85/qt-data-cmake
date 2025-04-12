@@ -3,9 +3,11 @@
 
 #include <QString>
 
+#include "data/post.h"
+
 namespace QtDataCmake::Prototype {
-class IReportGenerator {
-    virtual void generate(const QString &name) = 0;
+class IPostsReportGenerator {
+    virtual void generate(const QList<Data::Post>& posts, const QString &name) = 0;
 };
 }
 

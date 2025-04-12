@@ -1,24 +1,25 @@
 #ifndef QT_DATA_CMAKE_GENERATOR_HTML_REPORTGENERATOR_H
 #define QT_DATA_CMAKE_GENERATOR_HTML_REPORTGENERATOR_H
 
-#include <inja/inja.hpp>
-
-#include <qt-data-cmake-prototype/ireportgenerator.h>
+#include <qt-data-cmake-prototype/ipostsreportgenerator.h>
 
 #include "qt-data-cmake-generator-html_global.h"
 
 using namespace QtDataCmake::Prototype;
 
 namespace QtDataCmake::Generator::Html {
-class QT_DATA_CMAKE_GENERATOR_HTML_EXPORT ReportGenerator: public IReportGenerator
+class QT_DATA_CMAKE_GENERATOR_HTML_EXPORT PostsReportGenerator: public IPostsReportGenerator
 {
 public:
-    ReportGenerator(inja::json data, QString templatePath, QString outDirPath);
+    PostsReportGenerator(QString templatePath, QString outDirPath);
 
-    void generate(const QString &name);
+    void generate(const QList<Data::Post>& posts, const QString &name);
+
+    QString generateSVGChart(const QList<Data::Post>& posts);
+
+    QString createPieSlice(double cx, double cy, double r, double startAngleDeg, double spanAngleDeg, const QString& color, bool exploded = false);
 
 private:
-    inja::json data;
     QString templatePath;
     QString outDirPath;
 };

@@ -6,9 +6,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt6 6.5 REQUIRED COMPONENTS Core Sql Network)
 
-find_package(inja REQUIRED)
-find_package(xlnt REQUIRED)
-
 qt_standard_project_setup()
 
 qt_add_executable(qt-data-cmake
@@ -19,7 +16,7 @@ qt_add_executable(qt-data-cmake
  add_custom_target(copy_templates ALL
      COMMAND ${CMAKE_COMMAND} -E copy_directory
              ${CMAKE_SOURCE_DIR}/templates
-             ${CMAKE_BINARY_DIR}/templates
+             ${CMAKE_BINARY_DIR}/${CMAKE_CFG_INTDIR}/templates
      DEPENDS ${CMAKE_SOURCE_DIR}/templates
      COMMENT "Copying templates into binary directory"
  )
@@ -31,12 +28,11 @@ target_link_libraries(qt-data-cmake
         Qt::Core
         Qt::Sql
         Qt::Network
-        pantor::inja
-        xlnt::xlnt
         qt-data-cmake-prototype
         qt-data-cmake-repository-sqlite
         qt-data-cmake-repository-rest-api
         qt-data-cmake-generator-html
+        qt-data-cmake-generator-excel
 )
 
 include(GNUInstallDirs)
@@ -58,3 +54,4 @@ add_subdirectory(qt-data-cmake-repository-sqlite)
 add_subdirectory(qt-data-cmake-test)
 add_subdirectory(qt-data-cmake-repository-rest-api)
 add_subdirectory(qt-data-cmake-generator-html)
+add_subdirectory(qt-data-cmake-generator-excel)

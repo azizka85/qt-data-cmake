@@ -19,7 +19,7 @@ add_library(qt-data-cmake-prototype STATIC
   ipostrepository.h
   isessionrepository.h
   iuserrepository.h
-  ireportgenerator.h
+  ipostsreportgenerator.h
 )
 
 target_include_directories(qt-data-cmake-prototype PUBLIC ${CMAKE_SOURCE_DIR})

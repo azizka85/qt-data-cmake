@@ -4,8 +4,6 @@
 
 #include <QtSql/QSqlError>
 
-#include <inja/inja.hpp>
-
 #include <qt-data-cmake-repository-sqlite/userrepository.h>
 #include <qt-data-cmake-repository-sqlite/sessionrepository.h>
 #include <qt-data-cmake-repository-sqlite/postrepository.h>
@@ -15,8 +13,8 @@
 #include <qt-data-cmake-repository-rest-api/postrepository.h>
 #include <qt-data-cmake-repository-rest-api/likerepository.h>
 
-#include <qt-data-cmake-generator-html/reportgenerator.h>
-#include <qt-data-cmake-generator-html/utils.h>
+#include <qt-data-cmake-generator-html/postsreportgenerator.h>
+#include <qt-data-cmake-generator-excel/postsreportgenerator.h>
 
 using namespace QtDataCmake::Repository;
 using namespace QtDataCmake::Generator;
@@ -156,17 +154,23 @@ int main(int argc, char *argv[])
         QString outDirPath = "reports/html";
         QString reportName = "posts-" + currentDateTime.toString("dd-MM-yyyy-hh-mm-ss");
 
-        inja::json viewData;
-
-        viewData["posts"] = Html::postsListToJson(postList);    
-
-        Html::ReportGenerator htmlReportGenerator(
-            viewData,
+        Html::PostsReportGenerator htmlPostsReportGenerator(
             "templates/posts.html",
             outDirPath
         );        
 
-        htmlReportGenerator.generate(
+        htmlPostsReportGenerator.generate(
+            postList,
+            reportName
+        );
+
+        Excel::PostsReportGenerator excelPostsReportGenerator(
+            "templates/posts.xlsx",
+            outDirPath
+        );
+
+        excelPostsReportGenerator.generate(
+            postList,
             reportName
         );
     }
