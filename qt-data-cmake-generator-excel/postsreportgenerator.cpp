@@ -34,8 +34,23 @@ void PostsReportGenerator::generate(const QList<Data::Post> &posts, const QStrin
                  : "").toStdString()
         );
 
+        ws.row_properties(currentRow).height = 45;
+
         currentRow += 1;
     }
+
+    int liked = std::count_if(
+        posts.begin(), posts.end(),
+        [] (const Data::Post& post) {
+            return post.liked;
+        }
+    );
+
+    int disliked = posts.size() - liked;
+
+    ws.cell("J2").value(liked);
+    ws.cell("J3").value(disliked);
+    ws.cell("J4").value(posts.size());
 
     if (QDir().mkpath(outDirPath)) {
         QFileInfo fileInfo(outDirPath, name + ".xlsx");
